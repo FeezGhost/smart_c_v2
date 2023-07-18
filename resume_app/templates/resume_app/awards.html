@@ -1,0 +1,51 @@
+{% extends 'resume_app/partial_views/base.html' %}
+{% load static %}
+
+{% block nav_content %}
+  <div class="nav-box mt-2 px-4 py-2 text-center">
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a class='no-style' href="{% url 'personal_info' user_id %}">Personal Information</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'objective' user_id %}">Objective</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'education' user_id %}">Education</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'work_experience' user_id %}">Work Experience</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'internship' user_id %}">Internships/Volunteer Experience</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'skills' user_id %}">Skills</a></li>
+        <li class="breadcrumb-item active" aria-current="page"><a class='no-style' href="{% url 'awards' user_id %}">Awards</a></li>
+        {% if personal_info.is_professional_affiliation_clicked %}
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'affiliations' user_id %}">Affiliations</a></li>
+        {% else %}
+        <li class="breadcrumb-item" aria-current="page">Affiliations</li>
+        {% endif %}
+        {% if personal_info.is_refrence_clicked %}
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'references' user_id %}">References</a></li>
+        {% else %}
+        <li class="breadcrumb-item" aria-current="page">References</li>
+        {% endif %}
+        {% if personal_info.is_additional_information_clicked %}
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'additional_info' user_id %}">Additional Information</a></li>
+        {% else %}
+        <li class="breadcrumb-item" aria-current="page">Additional Information</li>
+        {% endif %}
+        {% if personal_info.is_job_description_clicked %}
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'job_description' user_id %}">Job Description</a></li>
+        {% else %}
+          <li class="breadcrumb-item" aria-current="page">Job Description</li>
+        {% endif %}
+      </ol>
+    </nav>
+  </div>
+{% endblock nav_content %}
+
+{% block content %}
+<form>
+  {% csrf_token %}
+      <h1 class="display-4 text-center">Awards and Honors</h1>
+      <hr>
+      <div class="form-floating mb-3 mt-4">
+        <input type="text" class="form-control" id="awards_list_id" name='awards_list' placeholder="List any awards, honors, or recognitions you have received (include the name of the award and the date received)" required>
+        <label for="awards_list_id">List any awards, honors, or recognitions you have received (include the name of the award and the date received):</label>
+      </div>
+      <button type="submit" class="btn btn-primary text-center">Next</button>
+    </form>
+{% endblock content %}

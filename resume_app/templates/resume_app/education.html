@@ -1,0 +1,147 @@
+{% extends 'resume_app/partial_views/base.html' %}
+{% load static %}
+
+{% block nav_content %}
+  <div class="nav-box mt-2 px-4 py-2 text-center">
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a class='no-style' href="{% url 'personal_info' user_id %}">Personal Information</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'objective' user_id %}">Objective</a></li>
+        <li class="breadcrumb-item active" aria-current="page"><a class='no-style' href="{% url 'education' user_id %}">Education</a></li>
+        {% if personal_info.is_work_experience_clicked %}
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'work_experience' user_id %}">Work Experience</a></li>
+        {% else %}
+        <li class="breadcrumb-item" aria-current="page">Work Experience</li>
+        {% endif %}
+        {% if personal_info.is_internship_experience_clicked %}
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'internship' user_id %}">Internships/Volunteer Experience</a></li>
+        {% else %}
+        <li class="breadcrumb-item" aria-current="page">Internships/Volunteer Experience</li>
+        {% endif %}
+        {% if personal_info.is_skill_clicked %}
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'skills' user_id %}">Skills</a></li>
+        {% else %}
+        <li class="breadcrumb-item" aria-current="page">Skills</li>
+        {% endif %}
+        {% if personal_info.is_award_clicked %}
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'awards' user_id %}">Awards</a></li>
+        {% else %}
+        <li class="breadcrumb-item" aria-current="page">Awards</li>
+        {% endif %}
+        {% if personal_info.is_professional_affiliation_clicked %}
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'affiliations' user_id %}">Affiliations</a></li>
+        {% else %}
+        <li class="breadcrumb-item" aria-current="page">Affiliations</li>
+        {% endif %}
+        {% if personal_info.is_refrence_clicked %}
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'references' user_id %}">References</a></li>
+        {% else %}
+        <li class="breadcrumb-item" aria-current="page">References</li>
+        {% endif %}
+        {% if personal_info.is_additional_information_clicked %}
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'additional_info' user_id %}">Additional Information</a></li>
+        {% else %}
+        <li class="breadcrumb-item" aria-current="page">Additional Information</li>
+        {% endif %}
+        {% if personal_info.is_job_description_clicked %}
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'job_description' user_id %}">Job Description</a></li>
+        {% else %}
+          <li class="breadcrumb-item" aria-current="page">Job Description</li>
+        {% endif %}
+      </ol>
+    </nav>
+  </div>
+{% endblock nav_content %}
+
+{% block content %}
+<form id="education-form" method="post">
+  {% csrf_token %}
+  <h1 class="display-4 text-center">Education</h1>
+  <hr>
+  <div class="form-container">
+    <div class="form-group">
+      <div class="form-floating mb-3 mt-4">
+        <input type="text" class="form-control" name='institute_name' placeholder="Name of the most recent educational institution attended" required>
+        <label>Name of the most recent educational institution attended:</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" name='degree' placeholder="Degree obtained (if applicable)">
+        <label>Degree obtained (if applicable):</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="month" class="form-control" name='graduation_date' placeholder="Graduation Date (Month and Year)" required>
+        <label>Graduation Date (Month and Year):</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="number" class="form-control" name='gpa' placeholder="GPA (if applicable)" step=".01">
+        <label>GPA (if applicable):</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" name='certifications' placeholder="Relevant coursework or certifications (if applicable)">
+        <label>Relevant coursework or certifications (if applicable):</label>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-between">
+    <button type="button" class="btn btn-outline-primary" id="add-form">+</button>
+    <button type="submit" class="btn btn-primary text-center">Next</button>
+  </div>
+</form>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const formContainer = document.querySelector('.form-container');
+    const addFormBtn = document.querySelector('#add-form');
+
+    addFormBtn.addEventListener('click', () => {
+      const newFormHtml = `
+        <div class="form-group">
+          <div class="d-flex justify-content-center">
+          <button type="button" class="btn btn-outline-danger btn-sm remove-form">X</button></div>
+          <div class="form-floating mb-3 mt-4">
+            <input type="text" class="form-control" name='institute_name' placeholder="Name of the most recent educational institution attended" required>
+            <label>Name of the most recent educational institution attended:</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" name='degree' placeholder="Degree obtained (if applicable)">
+            <label>Degree obtained (if applicable):</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="month" class="form-control" name='graduation_date' placeholder="Graduation Date (Month and Year)" required>
+            <label>Graduation Date (Month and Year):</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="number" class="form-control" name='gpa' placeholder="GPA (if applicable)" step=".01">
+            <label>GPA (if applicable):</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" name='certifications' placeholder="Relevant coursework or certifications (if applicable)">
+            <label>Relevant coursework or certifications (if applicable):</label>
+          </div>
+        </div>
+      `;
+      const newForm = document.createElement('div');
+      newForm.classList.add('form-group');
+      newForm.innerHTML = newFormHtml;
+      formContainer.appendChild(newForm);
+      
+      // Triggering reflow to ensure the animation starts
+      void newForm.offsetWidth;
+      
+      newForm.style.opacity = '1';
+      newForm.style.height = 'auto';
+      // Scroll to the newly added form
+      newForm.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    formContainer.addEventListener('click', (event) => {
+      if (event.target.classList.contains('remove-form')) {
+        const formGroup = event.target.closest('.form-group');
+        if (formContainer.children.length > 1) {
+          formGroup.remove();
+        }
+      }
+    });
+  });
+</script>
+{% endblock content %}

@@ -1,0 +1,263 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Resume Tailor</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9em !important;
+        }
+        a {
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #B43D37 !important;
+        }
+
+        .btn-primary {
+            background: rgb(63, 94, 251);
+            background: linear-gradient(90deg, #1fa0ff 0%, #fc466b 100%);
+            border-color: none !important;
+        }
+
+        .form-floating label {
+            font-size: small;
+        }
+        nav div ul li a{
+            font-weight: bolder;
+            color: black !important;
+        }
+        #banner .container div div h1, #banner .container div div ul li{
+            font-weight: bold;
+        }
+        #banner .container div div img{
+            width: 80%;
+        }
+        h1{
+            font-weight: bold;
+        }
+        #steps div .card{
+            border: none !important;
+            background-color: inherit !important;
+        }
+        #steps div .card img{
+            width: 17%;
+        }
+        
+        #steps div .card h5{
+            font-weight: bold;
+        }
+        #info div div div img{
+            width: 60%;
+        }
+        .btn-danger{
+            background-color: #AC2B25 !important;;
+        }
+        .btn-outline-danger{
+            color: #AC2B25 !important;
+            border-width: 2px !important;
+            border-color: #AC2B25 !important;
+        }
+        .btn-outline-danger:hover{
+            color: white !important;
+            background-color: #AC2B25 !important;
+        }
+        .bg-light{
+            background-color: white !important;
+        }
+    </style>
+    <style>
+        @media (max-width: 767px) {
+            .carousel-inner .carousel-item > div {
+                display: none;
+            }
+            .carousel-inner .carousel-item > div:first-child {
+                display: block;
+            }
+        }
+
+        .carousel-inner .carousel-item.active,
+        .carousel-inner .carousel-item-next,
+        .carousel-inner .carousel-item-prev {
+            display: flex;
+        }
+        .carousel-control-next,.carousel-control-prev {
+            filter: invert(100%);
+        }
+        /* medium and up screens */
+        @media (min-width: 768px) {
+            
+            .carousel-inner .carousel-item-end.active,
+            .carousel-inner .carousel-item-next {
+            transform: translateX(25%);
+            }
+            
+            .carousel-inner .carousel-item-start.active, 
+            .carousel-inner .carousel-item-prev {
+            transform: translateX(-25%);
+            }
+        }
+
+        .carousel-inner .carousel-item-end,
+        .carousel-inner .carousel-item-start { 
+            transform: translateX(0);
+        }
+
+
+    </style>
+</head>
+
+<body class="mb-4">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand ms-4" href="{% url 'landing' %}">
+            <img src="{% static 'img/brand_2.png' %}" alt="" width="90" height="64">
+        </a>
+    </nav>
+
+    <section id="banner" style="background-color: rgba(172, 44, 37, 0.24);">
+        <div class="container px-4 pt-4">
+            <div class="row mx-4 px-4 pt-4 mt-4">
+                <div class="col mt-4 pt-4">
+                    <h1>
+                        Create a custom
+                        resume and cover
+                        letter in minutes!
+                    </h1>
+                    <ul class="mt-2">
+                        <li>Clean, attention-grabbing resume templates.</li>
+                        <li>Pre-written resume examples to get you started.</li>
+                        <li>Step-by-step process created by resume experts.</li>
+                    </ul>
+                    <div class="d-flex">
+                        <a class="nav-link btn btn-danger text-light" href="{% url 'create_new' %}">Build My Resume</a>
+                        <a class="nav-link btn btn-outline-danger text-light ms-2" href="{% url 'existing_resume' %}">Already have Resume</a>
+                    </div>
+                </div>
+                <div class="col ms-2">
+                    <img src="{% static 'img/res 1.png' %}" alt="" srcset="">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="steps">
+        <div class="mt-4 pt-4">
+            <hr>
+            <div class="container text-center px-4 mt-4">
+                <h1>Create your resume in 3 simple steps:</h1>
+                <div class="mt-4 resume-steps d-flex justify-content-around">
+                    <div class="card" style="width: 18rem;">
+                        <img src="{% static 'img/stepA.png' %}" class="rounded mx-auto d-block" alt="" srcset="">
+                        <div class="card-body">
+                          <h5 class="card-title">Choose a template</h5>
+                          <p class="card-text">Pick from one of our professional designed
+                            templates that get past the ATS robots.</p>
+                        </div>
+                      </div>
+                      <div class="card" style="width: 18rem;">
+                        <img src="{% static 'img/stepB.png' %}" class="rounded mx-auto d-block" alt="" srcset="">
+                        <div class="card-body">
+                          <h5 class="card-title">Enter your info</h5>
+                          <p class="card-text">Follow a guided, step-by-step process with
+                            recruiter tips.</p>
+                        </div>
+                      </div>
+                      <div class="card" style="width: 18rem;">
+                        <img src="{% static 'img/stepC.png' %}" class="rounded mx-auto d-block" alt="" srcset="">
+                        <div class="card-body">
+                          <h5 class="card-title">Download your resume</h5>
+                          <p class="card-text">Download in PDF, MSWord, or TXT format.</p>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    
+    <section id="helper" class="container mt-4 py-4">
+        <div class="mt-4">
+            <h1 class="text-center">Here are the features of our resume builder.</h1>
+            <div class="row mt-5 pt-4">
+                <div class="col">
+                    <img src="{% static 'img/helperA.png' %}" alt="" srcset="">
+                </div>
+                <div class="col ms-5 mt-2">
+                    <h1>Upload your resume directly to overleaf</h1>
+                    <p class="mt-3">
+                        We scour the internet for current job listings and leverage AI
+                        technology to show positions that match your resume. When
+                        you find the perfect match, we help you add the right words
+                        to get past the screeners.
+                    </p>
+                    
+                    <a class="nav-link btn btn-danger text-light" href="{% url 'create_new' %}">Build My Resume</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="info" class="mt-4" style="background-color: #FAFAFA;">
+        <div class="container mt-4">
+            <div class="row mt-5">
+                <div class="col mt-5 me-5">
+                    <h1>Impress potential
+                        employers with
+                        your resume</h1>
+                    <p class="mt-2">
+                        Follow step-by-step professional guidance
+to create a polished resume in minutes.
+                    </p>
+                    
+                    <a class="nav-link btn btn-danger text-light" href="{% url 'create_new' %}">Create Resume</a>
+                </div>
+                <div class="col">
+                    <img src="{% static 'img/info.png' %}" alt="" srcset="">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="footer" class="container mt-5 text-center">
+        <div class="my-4 d-flex justify-content-center">
+            <p class="me-3">© 2023 Resume Tailor</p>
+            <p>Privacy Policy</p>
+        </div>
+    </section>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+    <script>
+        let items = document.querySelectorAll('.carousel .carousel-item')
+
+        items.forEach((el) => {
+            const minPerSlide = 4
+            let next = el.nextElementSibling
+            for (var i=1; i<minPerSlide; i++) {
+                if (!next) {
+                    // wrap carousel by using first child
+                    next = items[0]
+                }
+                let cloneChild = next.cloneNode(true)
+                el.appendChild(cloneChild.children[0])
+                next = next.nextElementSibling
+            }
+        })
+
+    </script>
+</body>
+
+</html>

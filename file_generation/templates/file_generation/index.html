@@ -1,0 +1,169 @@
+{% extends 'resume_app/partial_views/base_2nd.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    .loading-area {
+        display: grid;
+        place-items: center;
+        height: 50vh;
+    }
+    .loader div {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+        transform: scale(0);
+        animation: animate 1.5s ease-in-out infinite;
+        display: inline-block;
+        margin: .1rem .5rem;
+    }
+    .loader div:nth-child(0) {
+        animation-delay: 0s;
+    }
+    .loader div:nth-child(1) {
+        animation-delay: 0.2s;
+    }
+    .loader div:nth-child(2) {
+        animation-delay: 0.4s;
+    }
+    .loader div:nth-child(3) {
+        animation-delay: 0.6s;
+    }
+    .loader div:nth-child(4) {
+        animation-delay: 0.8s;
+    }
+    .loader div:nth-child(5) {
+        animation-delay: 1s;
+    }
+    .loader div:nth-child(6) {
+        animation-delay: 1.2s;
+    }
+    .loader div:nth-child(7) {
+        animation-delay: 1.4s;
+    }
+    @keyframes animate {
+        0%, 100% {
+            transform: scale(0.2);
+            background-color: #BD0036;
+        }
+        40% {
+            transform: scale(1);
+            background-color: #F25330;
+        }
+        50% {
+            transform: scale(1);
+            background-color: #F2B900;
+        }
+    }
+    
+</style>
+<div class="form-box mb-4 p-4">
+    <h1 class="text-center">Document Generation</h1>
+</div>
+
+<div class="loading-area" id="loading-area-id">
+    <div class="loader">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+
+<div style="display: none;" id="page-content">
+    <div class="form-box mb-4 p-4 text-center">
+        <h1>PDF Files</h1>
+        <hr>
+        <button onclick="downloadPDF('resume')" class="btn btn-primary text-center">Download Resume</button>
+        <button onclick="downloadPDF('cover_letter')" class="btn btn-primary text-center">Download Cover Letter</button>
+    </div>
+    
+    <div class="form-box mb-4 p-4 text-center">
+        <h1>Overleaf</h1>
+        <hr>
+        <button onclick="openInOverleaf('resume')" target="_blank" class="btn btn-secondary text-center">Open Resume</button>
+        <button  onclick="openInOverleaf('cover')" target="_blank" class="btn btn-secondary text-center">Open Cover Letter</button>
+    </div>
+    <div class="form-box mb-4 p-4 text-center">
+        <h1>ZIP Files</h1>
+        <hr>
+        <a id="zip_resume" target="_blank" class="btn btn-primary text-center">Download Resume</a>
+        <a id="zip_cover_letter" target="_blank" class="btn btn-primary text-center">Download Cover Letter</a>
+    </div>
+</div>
+<script>
+    var loader = document.getElementById("loading-area-id");
+    var pageContent = document.getElementById("page-content");
+    // Perform an AJAX request when the page loads
+    window.addEventListener('DOMContentLoaded', function () {
+        // Perform an AJAX request to the generate URL
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "{% url 'generate' user_id %}", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                loader.style.display = "none";
+                pageContent.style.display = "block";
+                // Handle the response
+                handleResponse(response);
+            }
+        };
+        xhr.send();
+    });
+    function handleResponse(response) {
+
+        // Display download links for resume and cover letter
+        var resumeLink = document.getElementById("zip_resume");
+        resumeLink.href = response.resume_zip_url;
+
+        var coverLetterLink = document.getElementById("zip_cover_letter");
+        coverLetterLink.href = response.cover_letter_zip_url;
+    }
+    
+    function openInOverleaf(type) {
+        var zipUrl = "";
+        if(type == 'resume'){
+            var resumeLink = document.getElementById("zip_resume");
+            zipUrl = resumeLink.href;
+        }
+        else{
+            var coverLetterLink = document.getElementById("zip_cover_letter");
+            zipUrl = coverLetterLink.href;
+        }
+        const encodedZipUrl = encodeURIComponent(zipUrl);
+        const overleafUrl = `https://www.overleaf.com/docs?snip_uri=${encodedZipUrl}`;
+        console.log("Zip URL:", zipUrl);
+        console.log("Overleaf URL:", overleafUrl);
+        window.open(overleafUrl, '_blank');
+        document.getElementById('overleaf-explainer').style.display = 'none';
+    }
+
+</script>
+<script>
+
+    function downloadPDF(file_type) {
+        var pk_id = "{{user_id}}";  // Replace with the actual pk_id value
+
+        // Make an AJAX request to the API endpoint
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', `/download-pdf/${pk_id}/${file_type}/`, true);
+        xhr.responseType = 'blob';  // Set the response type to 'blob'
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                // Create a download link for the PDF file
+                var downloadLink = document.createElement('a');
+                downloadLink.href = window.URL.createObjectURL(xhr.response);
+                downloadLink.download = `${pk_id}_${file_type}.pdf`;
+                downloadLink.click();
+            } else {
+                console.error('Error occurred while downloading PDF.');
+            }
+        };
+        xhr.send();
+    }
+</script>
+{% endblock content %}

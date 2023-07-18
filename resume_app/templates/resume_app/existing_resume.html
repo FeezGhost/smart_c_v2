@@ -1,0 +1,18 @@
+{% extends 'resume_app/partial_views/base.html' %}
+{% load static %}
+
+{% block content %}
+<form>
+  {% csrf_token %}
+    <div class="mb-3">
+      <label for="resume_id" class="form-label">Enter Your Resume</label>
+      <textarea class="form-control" name="resume" id="resume_id" rows="10"></textarea>
+    </div>
+      <hr>
+      <div class="mb-3">
+        <label for="job_des_id" class="form-label">Enter Your Job Description</label>
+        <textarea class="form-control" name="job_des" id="job_des_id" rows="10"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary text-center">Generate</button>
+    </form>
+{% endblock content %}

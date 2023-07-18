@@ -1,0 +1,91 @@
+{% extends 'resume_app/partial_views/base.html' %}
+{% load static %}
+
+{% block nav_content %}
+  <div class="nav-box mt-2 px-4 py-2 text-center">
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active"><a class='no-style' href="{% url 'personal_info' user_id %}">Personal Information</a></li>
+        {% if personal_info.is_objective_clicked %}
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'objective' user_id %}">Objective</a></li>
+        {% else %}
+        <li class="breadcrumb-item" aria-current="page">Objective</li>
+        {% endif %}
+        {% if personal_info.is_education_clicked %}
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'education' user_id %}">Education</a></li>
+        {% else %}
+        <li class="breadcrumb-item" aria-current="page">Education</li>
+        {% endif %}
+        {% if personal_info.is_work_experience_clicked %}
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'work_experience' user_id %}">Work Experience</a></li>
+        {% else %}
+        <li class="breadcrumb-item" aria-current="page">Work Experience</li>
+        {% endif %}
+        {% if personal_info.is_internship_experience_clicked %}
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'internship' user_id %}">Internships/Volunteer Experience</a></li>
+        {% else %}
+        <li class="breadcrumb-item" aria-current="page">Internships/Volunteer Experience</li>
+        {% endif %}
+        {% if personal_info.is_skill_clicked %}
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'skills' user_id %}">Skills</a></li>
+        {% else %}
+        <li class="breadcrumb-item" aria-current="page">Skills</li>
+        {% endif %}
+        {% if personal_info.is_award_clicked %}
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'awards' user_id %}">Awards</a></li>
+        {% else %}
+        <li class="breadcrumb-item" aria-current="page">Awards</li>
+        {% endif %}
+        {% if personal_info.is_professional_affiliation_clicked %}
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'affiliations' user_id %}">Affiliations</a></li>
+        {% else %}
+        <li class="breadcrumb-item" aria-current="page">Affiliations</li>
+        {% endif %}
+        {% if personal_info.is_refrence_clicked %}
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'references' user_id %}">References</a></li>
+        {% else %}
+        <li class="breadcrumb-item" aria-current="page">References</li>
+        {% endif %}
+        {% if personal_info.is_additional_information_clicked %}
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'additional_info' user_id %}">Additional Information</a></li>
+        {% else %}
+        <li class="breadcrumb-item" aria-current="page">Additional Information</li>
+        {% endif %}
+        {% if personal_info.is_job_description_clicked %}
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'job_description' user_id %}">Job Description</a></li>
+        {% else %}
+          <li class="breadcrumb-item" aria-current="page">Job Description</li>
+        {% endif %}
+      </ol>
+    </nav>
+  </div>
+{% endblock nav_content %}
+
+{% block content %}
+<form method='post'>
+  {% csrf_token %}
+      <h1 class="display-4 text-center">Personal Information</h1>
+      <hr>
+      <div class="form-floating mb-3 mt-4">
+        <input type="text" class="form-control" id="full_name_id" name='full_name' placeholder="Full Name" required>
+        <label for="full_name_id">Full Name:</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="address_id" name='address' placeholder="Address" required>
+        <label for="address_id">Address:</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="phone_number_id" name='phone_number' placeholder="Phone Number" required>
+        <label for="phone_number_id">Phone Number:</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="email" class="form-control" id="email_id" name='email' placeholder="Email Address" required>
+        <label for="email_id">Email Address:</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="url" class="form-control" id="linkedin_id" name='linkedin' placeholder="LinkedIn Profile Url">
+        <label for="linkedin_id">LinkedIn Profile (if applicable):</label>
+      </div>
+      <button type="submit" class="btn btn-primary text-center">Next</button>
+    </form>
+{% endblock content %}

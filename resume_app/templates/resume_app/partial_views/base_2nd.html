@@ -1,0 +1,105 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <title>Resume Tailor</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
+     body{
+      /* background-color: #F9F3A2; */
+      /* background-color: #B43D37; */
+      background-color: #dfdbdb13;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9em !important;
+     }
+    .form-box{
+      margin-left: 20%;
+      margin-right: 20%;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      border: 2.5px solid transparent;
+    border-image: linear-gradient(90deg, rgba(249, 230, 162, 1) 29%, rgba(180, 61, 55, 1) 100%);
+    border-image-slice: 1;
+    /* border-radius: 25px; */
+    }
+    .nav-box{
+      margin-left: 20%;
+      margin-right: 20%;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      border: 2.5px solid transparent;
+    border-image: linear-gradient(270deg, rgba(249, 230, 162, 1) 29%, rgba(180, 61, 55, 1) 100%);
+    border-image-slice: 1;
+    }
+    hr{
+      border: 2.5px solid transparent;
+    border-image: linear-gradient(180deg, #f9e6a2 29%, #e7190e 100%);
+    border-image-slice: 1;
+    }
+    .form-box{
+      margin-top: 1%;
+    }
+    textarea{
+      resize: none;
+    }
+    .breadcrumb-item.active{
+      font-weight: bold;
+      color: #ba322b !important;
+    }
+    .breadcrumb-item{
+      color: #6c757d !important;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    a:hover{
+      color: #B43D37 !important;
+    }
+    .btn-primary{
+      background: rgb(63,94,251);
+      background: linear-gradient(90deg, #1fa0ff 0%, #fc466b 100%);
+      border-color: none !important;
+    }
+    .btn-secondary{
+      background: rgb(63,94,251);
+      background: linear-gradient(90deg, #fc466b 0%, #1fa0ff 100%);
+      border-color: none !important;
+    }
+    .bg-overlay{
+      background-color: #f9e6a2d2 !important;
+    }
+    .form-floating label{
+      font-size: small;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-light bg-overlay">
+      <a class="navbar-brand ms-4" href="{% url 'landing' %}">
+        <img src="{% static 'img/brand.jpg' %}" alt="" width="90" height="64">
+      </a>
+  </nav>
+
+  {% block nav_content %}
+    
+  {% endblock nav_content %}
+  {% block content %}
+
+  {% endblock content %}
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+{% extends 'resume_app/partial_views/base.html' %}
+{% load static %}
+
+{% block nav_content %}
+  <div class="nav-box mt-2 px-4 py-2 text-center">
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a class='no-style' href="{% url 'personal_info' user_id %}">Personal Information</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'objective' user_id %}">Objective</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'education' user_id %}">Education</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'work_experience' user_id %}">Work Experience</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'internship' user_id %}">Internships/Volunteer Experience</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'skills' user_id %}">Skills</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'awards' user_id %}">Awards</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'affiliations' user_id %}">Affiliations</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'references' user_id %}">References</a></li><li class="breadcrumb-item active" aria-current="page"><a class='no-style' href="{% url 'additional_info' user_id %}">Additional Information</a></li>
+        {% if personal_info.is_job_description_clicked %}
+        <li class="breadcrumb-item" aria-current="page"><a class='no-style' href="{% url 'job_description' user_id %}">Job Description</a></li>
+        {% else %}
+          <li class="breadcrumb-item" aria-current="page">Job Description</li>
+        {% endif %}
+      </ol>
+    </nav>
+  </div>
+{% endblock nav_content %}
+
+{% block content %}
+<form>
+  {% csrf_token %}
+      <h1 class="display-4 text-center">Additional Information</h1>
+      <hr>
+      <div class="mb-3">
+        <label for="additional_info_id" class="form-label">Are there any other relevant experiences, skills, or information you would like to include on your resume?</label>
+        <textarea class="form-control" name="additional_info" id="additional_info_id" rows="10"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary text-center">Next</button>
+    </form>
+{% endblock content %}

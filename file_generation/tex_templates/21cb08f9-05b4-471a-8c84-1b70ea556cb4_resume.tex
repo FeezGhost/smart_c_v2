@@ -1,0 +1,35 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+
+% Define command for personal information
+\newcommand{\personalinfo}[3]{%
+    \noindent\textbf{Address:} #1 \\
+    \textbf{Phone Number:} #2 \\
+    \textbf{Email:} #3 \\
+}
+
+% Define command for section headers
+\newcommand{\sectionheader}[1]{%
+    \noindent\textbf{\Large #1} \\
+    \hrule
+}
+
+% Define command for list entries
+\newcommand{\listentry}[3]{%
+    \noindent\textbf{#1} \\
+    \textit{#2} \\
+    #3 \\
+    \vspace{8pt}
+}
+
+% Start of the document
+\begin{document}
+
+% Title
+\begin{center}
+    \Huge\textbf{Customized Resume}
+\end{center}
+
+% Personal Information
+\sectionheader{Personal Information}
+\personalinfo{House No. 1, Lane 10, Royal Avenue Near Comsats Tarlai kalan}{03069116931}{iammuhammadusman1@gmail.com}
